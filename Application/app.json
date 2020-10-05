@@ -1,0 +1,12 @@
+{
+  "name": "UFSports",
+  "displayName": "UFSports",
+  "expo": {
+    "name": "UFSports",
+    "slug": "UFSports",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
