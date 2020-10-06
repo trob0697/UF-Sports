@@ -11,3 +11,9 @@ Summary of Application Here
 - npx react-native run-andriod
 - npx start
 - npx test
+
+# Literature Sources
+- https://reactnative.dev/docs/getting-started
+- https://reactnavigation.org/docs/getting-started
+- https://realpython.com/beautiful-soup-web-scraper-python/
+- https://rnfirebase.io
