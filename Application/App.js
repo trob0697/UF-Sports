@@ -1,21 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import HomeStack from "./navigators/HomeStack.js";
+import CalendarStack from "./navigators/CalendarStack.js";
+import RostersStack from "./navigators/RostersStack.js";
+import TicketingStack from "./navigators/TicketingStack.js";
+import SettingsStack from "./navigators/SettingsStack.js";
+import AboutStack from "./navigators/AboutStack.js";
+
+const Drawer = createDrawerNavigator()
+
+class App extends React.Component {
+  render() {
+    return (
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName="Home">
+          <Drawer.Screen name="Home" component={HomeStack} />
+          <Drawer.Screen name="Calendar" component={CalendarStack} />
+          <Drawer.Screen name="Rosters" component={RostersStack} />
+          <Drawer.Screen name="Ticketing" component={TicketingStack} />
+          <Drawer.Screen name="Settings" component={SettingsStack} />
+          <Drawer.Screen name="About" component={AboutStack} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    )
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
