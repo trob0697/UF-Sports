@@ -6,11 +6,10 @@ Summary of Application Here
 
 # Scripts
 - npm install (Must be done first: Install all dependences and packages)
-- npx expo start
-- npx react-native run-ios
-- npx react-native run-andriod
-- npx start
-- npx test
+- npm start (you can open iOS, Android, or web from here, or run them directly with the commands below)
+- npm run android
+- npm run ios
+- npm run web
 
 # Literature Sources
 - https://reactnative.dev/docs/getting-started

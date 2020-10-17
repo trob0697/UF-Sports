@@ -1,6 +1,0 @@
-module Pods_UFSports {
-  umbrella header "Pods-UFSports-umbrella.h"
-
-  export *
-  module * { export * }
-}

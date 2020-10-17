@@ -1,12 +1,26 @@
 {
-  "name": "UFSports",
-  "displayName": "UFSports",
   "expo": {
-    "name": "UFSports",
-    "slug": "UFSports",
+    "name": "Application",
+    "slug": "Application",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "",
+    "splash": {
+      "image": "",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "web": {
+      "favicon": ""
+    }
   }
 }
