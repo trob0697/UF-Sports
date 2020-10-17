@@ -1,9 +1,17 @@
 import React from 'react';
 import { StyleSheet, View, Image, ActivityIndicator } from 'react-native';
+import { connect } from 'react-redux';
+import firebase from '../firebase.js';
 
 class Loading extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+  
   componentDidMount() {
     setTimeout(() => this.props.toggleLoading(), 4000)
+    //console.log(this.props.redux)
   }
 
   render() {
@@ -31,4 +39,14 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Loading;
+function mapStateToProps(state) {
+  return {
+    redux: state
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Loading);
