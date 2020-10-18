@@ -9,9 +9,22 @@ class Loading extends React.Component {
     this.state = {}
   }
   
-  componentDidMount() {
+  async componentDidMount() {
+    this.props.fetchEvents(await this.fetchData('events'))
+    this.props.fetchStories(await this.fetchData('stories'))
     setTimeout(() => this.props.toggleLoading(), 4000)
     //console.log(this.props.redux)
+  }
+
+  fetchData = async (val) => {
+    var snapshotArr = [];
+    await firebase.database().ref(val).once('value').then(snapshot => {
+      snapshot.forEach((childSnapshot) => {
+        var item = childSnapshot.val();
+        snapshotArr.push(item);
+      })
+    })
+    return snapshotArr
   }
 
   render() {
@@ -46,7 +59,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {}
+  return {
+    fetchEvents: (input) => dispatch({ type: 'FETCH_EVENTS', payload: input }),
+    fetchStories: (input) => dispatch({ type: 'FETCH_STORIES', payload: input })
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Loading);
