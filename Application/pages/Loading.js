@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, View, Image, ActivityIndicator } from 'react-native';
-import { connect } from 'react-redux';
-import firebase from '../firebase.js';
+import React from "react";
+import { StyleSheet, View, Image, ActivityIndicator } from "react-native";
+import { connect } from "react-redux";
+import firebase from "../firebase.js";
 
 class Loading extends React.Component {
   constructor(props) {
@@ -17,8 +17,8 @@ class Loading extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={require('../assets/loadinggator.png')} style={styles.image} />
-        <ActivityIndicator size='large' color='#FA4616' style={styles.loadingIndication} />
+        <Image source={require("../assets/loadinggator.png")} style={styles.image} />
+        <ActivityIndicator size="large" color="#FA4616" style={styles.loadingIndication} />
       </View>
     )
   }
@@ -26,13 +26,13 @@ class Loading extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
-    backgroundColor: '#0021A5',
-    justifyContent: 'center'
+    height: "100%",
+    backgroundColor: "#0021A5",
+    justifyContent: "center"
   },
   image: {
-    alignSelf: 'center',
-    resizeMode: 'contain'
+    alignSelf: "center",
+    resizeMode: "contain"
   },
   loadingIndication: {
     padding: 15

@@ -7,7 +7,7 @@ import Hamburger from "../components/Hamburger";
 import Settings from "../pages/Settings.js";
 
 const Stack = createStackNavigator()
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 const scale = SCREEN_WIDTH / 320;
 
 export default class SettingsStack extends React.Component {
@@ -29,15 +29,15 @@ export default class SettingsStack extends React.Component {
 }
 const styles = StyleSheet.create({
   headerContainer: {
-    backgroundColor: '#0021A5',
+    backgroundColor: "#0021A5",
     height: SCREEN_HEIGHT * 0.12
   },
   text: {
-    color: '#FA4616',
+    color: "#FA4616",
     fontSize: 25 * scale
   },
   headerRefresh: {
     paddingRight: 25,
-    color: '#FA4616'
+    color: "#FA4616"
   }
 })
