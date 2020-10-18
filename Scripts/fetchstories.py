@@ -4,12 +4,12 @@ import json
 from bs4 import BeautifulSoup as bs
 import pyrebase
 
-HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36',}
+HEADERS = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36",}
 url = "https://floridagators.com"
 r = requests.get(url, timeout=5, headers=HEADERS)
 soup = bs(r.content, features="html.parser")
 
-stories_script = soup.find(id='stories').find('script').string
+stories_script = soup.find(id="stories").find("script").string
 stories_string = re.findall("var obj = (.*?);", stories_script)[0]
 stories_data = json.loads(stories_string)["data"]
 

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Dimensions, StyleSheet, View, Text } from 'react-native';
-import { connect } from 'react-redux';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
+import React from "react";
+import { Dimensions, StyleSheet, View, Text } from "react-native";
+import { connect } from "react-redux";
+import Carousel, { Pagination } from "react-native-snap-carousel";
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 const scale = SCREEN_WIDTH / 320;
 
 var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -42,7 +42,7 @@ class UpcomingEvents extends React.Component {
         <Pagination
           dotsLength={this.props.events.length}
           activeDotIndex={this.state.currentIndex}
-          dotStyle={{ backgroundColor: '#FA4616' }}
+          dotStyle={{ backgroundColor: "#FA4616" }}
           containerStyle={styles.pagination}
         />
       </View>
@@ -53,36 +53,36 @@ class UpcomingEvents extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: "#F5F5F5",
     paddingTop: 15,
     paddingBottom: 0
   },
   title: {
     paddingLeft: 15,
     fontSize: 14 * scale,
-    color: '#0021A5'
+    color: "#0021A5"
   },
   eventText: {
     paddingTop: 5,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 12 * scale,
-    color: '#FA4616',
+    color: "#FA4616",
     textShadowRadius: 0.5,
-    textShadowColor: '#0021A5'
+    textShadowColor: "#0021A5"
   },
   eventSubText1: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 14 * scale,
-    color: '#FA4616',
+    color: "#FA4616",
     textShadowRadius: 0.5,
-    textShadowColor: '#0021A5'
+    textShadowColor: "#0021A5"
   },
   eventSubText2: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 8 * scale,
-    color: '#FA4616',
+    color: "#FA4616",
     textShadowRadius: 0.5,
-    textShadowColor: '#0021A5'
+    textShadowColor: "#0021A5"
   },
   pagination: {
     paddingTop: 4 * scale,
