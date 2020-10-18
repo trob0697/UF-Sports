@@ -16,3 +16,4 @@ Summary of Application Here
 - https://reactnavigation.org/docs/getting-started
 - https://realpython.com/beautiful-soup-web-scraper-python/
 - https://rnfirebase.io
+- https://medium.com/lazy-engineering/creating-an-embedded-browser-with-react-native-aea42b54740
