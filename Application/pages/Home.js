@@ -37,7 +37,7 @@ class Home extends React.Component {
       <View style={styles.container}>
       {this.state.webViewerVisible ?
         <WebViewer url={this.state.url} closeWebViewer={this.closeWebViewer}/>
-        :
+      :
         <>
           <View style={styles.subHeader}>
             <Image source={require("../assets/gatorlogo.jpg")} style={styles.gatorLogo} />

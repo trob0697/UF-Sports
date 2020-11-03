@@ -17,7 +17,7 @@ class RecentNews extends React.Component {
 
   renderItem = ({ item, index }) => {
     var date = new Date(item.date)
-    var dateString = monthNames[date.getMonth()] + " " + date.getDay() + ", " + date.getFullYear()
+    var dateString = monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear()
     return (
       <ImageBackground key={index} source={{ uri: item.image }} style={styles.image} imageStyle={{ borderRadius: 25 }}>
         <View style={styles.imageContainer}>

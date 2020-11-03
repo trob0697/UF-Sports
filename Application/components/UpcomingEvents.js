@@ -18,7 +18,7 @@ class UpcomingEvents extends React.Component {
 
   renderItem = ({ item, index }) => {
     var date = new Date(item.date)
-    var dateString = monthNames[date.getMonth()] + " " + date.getDay() + ", " + date.getFullYear() + " "
+    var dateString = monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " "
     return (
       <View key={index}>
         <Text style={styles.eventText}>{item.sport}</Text>
