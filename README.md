@@ -2,6 +2,7 @@
 
 Summary of Application Here
 
+[GANTT Chart](https://imgur.com/a/LfFAYWd)
 [Wireframes](https://www.figma.com/file/wMaIYHPwVrpYJMHmyRnN35/UF-Sports)
 
 # Scripts
