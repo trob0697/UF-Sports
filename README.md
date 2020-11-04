@@ -6,6 +6,8 @@ Summary of Application Here
 
 [Wireframes](https://www.figma.com/file/wMaIYHPwVrpYJMHmyRnN35/UF-Sports)
 
+Email: trtnufsports@gmail.com:gogators!
+
 # Scripts
 - npm install (Must be done first: Install all dependences and packages)
 - npm start (you can open iOS, Android, or web from here, or run them directly with the commands below)
