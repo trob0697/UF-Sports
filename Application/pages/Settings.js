@@ -1,40 +1,24 @@
 import React from "react";
 import { Dimensions, StyleSheet, View, Text, Switch, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { connect } from "react-redux";
 
 import Feedback from "../components/Feedback.js";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 const scale = SCREEN_WIDTH / 320;
+const keyboardVerticalOffset = Platform.OS === 'ios' ? 60 : 0
 
 class Settings extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      pushNotificationsIsEnabled: false,
-      darkModeIsEnabled: false
-    }
-  }
-
-  togglePushNotifications = () => {
-    this.setState({
-      ...this.state,
-      pushNotificationsIsEnabled: !this.state.pushNotificationsIsEnabled
-    })
-  }
-
-  toggleDarkMode = () => {
-    this.setState({
-      ...this.state,
-      darkModeIsEnabled: !this.state.darkModeIsEnabled
-    })
+    this.state = { }
   }
 
   render() {
-    const keyboardVerticalOffset = Platform.OS === 'ios' ? 60 : 0
     return (
       <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={keyboardVerticalOffset}>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <View style={styles.container}>
+          <View style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
             <View>
               <Text style={styles.headerText}>Version 1.1</Text>
             </View>
@@ -46,8 +30,8 @@ class Settings extends React.Component {
                 <Text style={styles.headerText}>Push Notifications</Text>
                 <Switch
                   trackColor={{false: "#767577", true: "#008000"}}
-                  onValueChange={this.togglePushNotifications}
-                  value={this.state.pushNotificationsIsEnabled}
+                  onValueChange={() => {}}
+                  value={false}
                   style={{alignSelf: "flex-end"}}
                 />
               </View>
@@ -56,12 +40,12 @@ class Settings extends React.Component {
             <View style={styles.line}/>
 
             <View>
-            <View style={styles.containerWithButton}>
+              <View style={styles.containerWithButton}>
                 <Text style={styles.headerText}>Dark Mode</Text>
                 <Switch
                   trackColor={{false: "#767577", true: "#008000"}}
-                  onValueChange={this.toggleDarkMode}
-                  value={this.state.darkModeIsEnabled}
+                  onValueChange={() => this.props.toggleDarkMode()}
+                  value={this.props.darkModeIsEnabled}
                   style={{alignSelf: "flex-end"}}
                 />
               </View>
@@ -80,7 +64,7 @@ class Settings extends React.Component {
 
             <View>
               <Text style={styles.headerText}>Submit Feedback</Text>
-              <Feedback/>
+              <Feedback darkModeIsEnabled={this.props.darkModeIsEnabled}/>
             </View> 
           </View>
         </TouchableWithoutFeedback>  
@@ -91,7 +75,11 @@ class Settings extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    padding: "5%"
+  },
+  containerDark: {
     padding: "5%",
+    backgroundColor: "#444444"
   },
   containerWithButton: {
     flexDirection: "row",
@@ -99,16 +87,34 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 18 * scale,
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
+    color: "#FA4616",
+    textShadowRadius: 0.25,
+    textShadowColor: "#0021A5"
   },
   about: {
-    margin: 10
+    margin: 10,
+    color: "#FA4616",
+    textShadowRadius: 0.25,
+    textShadowColor: "#0021A5"
   },
   line: {
     height: 1,
-    backgroundColor: "black",
+    backgroundColor: "#FA4616",
     marginVertical: 10
   }
 })
 
-export default Settings;
+function mapStateToProps(state) {
+  return {
+    darkModeIsEnabled: state.darkModeIsEnabled
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    toggleDarkMode: () => dispatch({ type: "TOGGLE_DARK_MODE" }),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

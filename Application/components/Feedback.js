@@ -26,7 +26,7 @@ class Feedback extends React.Component{
         return(
             <View style={styles.container}>
                 <TextInput
-                    style={styles.textInput}
+                    style={this.props.darkModeIsEnabled ? styles.textInputDark : styles.textInput}
                     multiline={true}
                     padding={10}
                     onChangeText={(e) => this.setState({value: e})}
@@ -45,8 +45,17 @@ const styles = StyleSheet.create({
     textInput: {
         height: SCREEN_HEIGHT*0.25, 
         borderRadius: 10,
+        color: "black",
         backgroundColor: "white",
-        borderColor: "black",
+        borderColor: "#FA4616",
+        borderWidth: 1
+    },
+    textInputDark: {
+        height: SCREEN_HEIGHT*0.25, 
+        borderRadius: 10,
+        color: "white",
+        backgroundColor: "#878683",
+        borderColor: "#FA4616",
         borderWidth: 1
     }
 })
