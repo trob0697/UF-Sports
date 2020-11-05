@@ -15,7 +15,7 @@ class LiveScores extends React.Component {
 
   online = () => {
     return (
-      <View style={styles.container}>
+      <View style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.title}>Live Scores</Text>
           <Ionicons name="md-radio-button-on" size={12 * scale} style={styles.live} />
@@ -26,7 +26,7 @@ class LiveScores extends React.Component {
           <Image source={require("../assets/uflogo.png")} style={styles.teamLogo} />
           <Text style={styles.teamName}>UF</Text>
           <View style={styles.scoreBox}>
-            <Text style={styles.scoreValues}>0 - 0</Text>
+            <Text style={this.props.darkModeIsEnabled ? styles.scoreValuesDark : styles.scoreValues}>0 - 0</Text>
           </View>
           <Text style={styles.teamName}>???</Text>
           <Image source={require("../assets/unknown.png")} style={styles.teamLogo} />
@@ -37,7 +37,7 @@ class LiveScores extends React.Component {
 
   offline = () => {
     return (
-      <View style={styles.container}>
+      <View style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.title}>Live Scores</Text>
           <Ionicons name="md-radio-button-off" size={15} style={styles.live} />
@@ -48,7 +48,7 @@ class LiveScores extends React.Component {
           <Image source={require("../assets/uflogo.png")} style={styles.teamLogo} />
           <Text style={styles.teamName}>UF</Text>
           <View style={styles.scoreBox}>
-            <Text style={styles.scoreValues}>0 - 0</Text>
+            <Text style={this.props.darkModeIsEnabled ? styles.scoreValuesDark : styles.scoreValues}>0 - 0</Text>
           </View>
           <Text style={styles.teamName}>???</Text>
           <Image source={require("../assets/unknown.png")} style={styles.teamLogo} />
@@ -70,13 +70,21 @@ class LiveScores extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
     padding: 15,
-    paddingBottom: 0
+    paddingBottom: 0,
+    backgroundColor: "#F5F5F5"
+  },
+  containerDark: {
+    flex: 1,
+    padding: 15,
+    paddingBottom: 0,
+    backgroundColor: "#444444"
   },
   title: {
     fontSize: 14 * scale,
-    color: "#0021A5"
+    color: "#FA4616",
+    textShadowRadius: 0.25,
+    textShadowColor: "#0021A5"
   },
   live: {
     alignSelf: "center",
@@ -87,14 +95,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 10 * scale,
     color: "#FA4616",
-    textShadowRadius: 0.5,
+    textShadowRadius: 0.25,
     textShadowColor: "#0021A5"
   },
   subHeadingTime: {
     textAlign: "center",
     fontSize: 8 * scale,
     color: "#FA4616",
-    textShadowRadius: 0.5,
+    textShadowRadius: 0.25,
     textShadowColor: "#0021A5"
   },
   scoring: {
@@ -115,7 +123,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16 * scale,
     color: "#F5F5F5",
-    textShadowRadius: 2,
+    textShadowRadius: 0.25,
+    textShadowColor: "#0021A5"
+  },
+  scoreValuesDark: {
+    textAlign: "center",
+    fontSize: 16 * scale,
+    color: "#444444",
+    textShadowRadius: 0.25,
     textShadowColor: "#0021A5"
   },
   teamLogo: {
@@ -131,7 +146,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20 * scale,
     color: "#FA4616",
-    textShadowRadius: 0.5,
+    textShadowRadius: 0.25,
     textShadowColor: "#0021A5"
   }
 })

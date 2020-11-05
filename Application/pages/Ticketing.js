@@ -1,5 +1,6 @@
 import React from "react";
 import { Dimensions, StyleSheet, View, ImageBackground, Text, TouchableHighlight } from "react-native";
+import { connect } from "react-redux";
 
 import WebViewer from "../components/WebViewer.js";
 
@@ -31,7 +32,7 @@ class Ticketing extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
       {this.state.webViewerVisible ?
         <WebViewer url={this.state.url} closeWebViewer={this.closeWebViewer}/>
       :
@@ -62,6 +63,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingBottom: 30
   },
+  containerDark: {
+    flex: 1,
+    paddingBottom: 30,
+    backgroundColor: "#444444",
+  },
   imageContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -83,4 +89,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Ticketing;
+function mapStateToProps(state) {
+  return {
+    darkModeIsEnabled: state.darkModeIsEnabled
+  }
+}
+
+export default connect(mapStateToProps)(Ticketing);
