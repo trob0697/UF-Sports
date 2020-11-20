@@ -3,9 +3,9 @@ import { Dimensions, StyleSheet, View, Image } from "react-native";
 import { connect } from "react-redux";
 
 import WebViewer from "../components/WebViewer.js";
-import LiveScores from "../components/LiveScores.js";
+import RecentResults from "../components/RecentResults.js";
 import UpcomingEvents from "../components/UpcomingEvents.js";
-import RecentNews from "../components/RecentNews.js";
+import BreakingNews from "../components/BreakingNews.js";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 const scale = SCREEN_WIDTH / 320;
@@ -43,9 +43,9 @@ class Home extends React.Component {
           <View style={styles.subHeader}>
             <Image source={require("../assets/gatorlogo.jpg")} style={styles.gatorLogo} />
           </View>
-          <LiveScores darkModeIsEnabled={this.props.darkModeIsEnabled}/>
+          <RecentResults darkModeIsEnabled={this.props.darkModeIsEnabled}/>
           <UpcomingEvents darkModeIsEnabled={this.props.darkModeIsEnabled}/>
-          <RecentNews darkModeIsEnabled={this.props.darkModeIsEnabled} openWebViewer={this.openWebViewer}/>
+          <BreakingNews darkModeIsEnabled={this.props.darkModeIsEnabled} openWebViewer={this.openWebViewer}/>
         </>
       }
       </View>

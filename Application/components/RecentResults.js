@@ -1,68 +1,36 @@
 import React from "react";
 import { Dimensions, StyleSheet, View, Text, Image } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { connect } from "react-redux";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 const scale = SCREEN_WIDTH / 320;
 
-class LiveScores extends React.Component {
+var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+class RecentResults extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      live: false
-    }
-  }
-
-  online = () => {
-    return (
-      <View style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={styles.title}>Live Scores</Text>
-          <Ionicons name="md-radio-button-on" size={12 * scale} style={styles.live} />
-        </View>
-        <Text style={styles.subHeading}>Unavailable</Text>
-        <Text style={styles.subHeadingTime}>0:00</Text>
-        <View style={styles.scoring}>
-          <Image source={require("../assets/uflogo.png")} style={styles.teamLogo} />
-          <Text style={styles.teamName}>UF</Text>
-          <View style={styles.scoreBox}>
-            <Text style={this.props.darkModeIsEnabled ? styles.scoreValuesDark : styles.scoreValues}>0 - 0</Text>
-          </View>
-          <Text style={styles.teamName}>???</Text>
-          <Image source={require("../assets/unknown.png")} style={styles.teamLogo} />
-        </View>
-      </View>
-    )
-  }
-
-  offline = () => {
-    return (
-      <View style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={styles.title}>Live Scores</Text>
-          <Ionicons name="md-radio-button-off" size={15} style={styles.live} />
-        </View>
-        <Text style={styles.subHeading}>Unavailable</Text>
-        <Text style={styles.subHeadingTime}>0:00</Text>
-        <View style={styles.scoring}>
-          <Image source={require("../assets/uflogo.png")} style={styles.teamLogo} />
-          <Text style={styles.teamName}>UF</Text>
-          <View style={styles.scoreBox}>
-            <Text style={this.props.darkModeIsEnabled ? styles.scoreValuesDark : styles.scoreValues}>0 - 0</Text>
-          </View>
-          <Text style={styles.teamName}>???</Text>
-          <Image source={require("../assets/unknown.png")} style={styles.teamLogo} />
-        </View>
-      </View>
-    )
+    this.state = { }
   }
 
   render() {
-    return (
-      this.state.live ?
-        this.online()
-        :
-        this.offline()
+    var date = new Date(this.props.results[0].date)
+    var dateString = monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear()
+    return(
+      <View style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
+        <Text style={styles.title}>Recent Results</Text>
+        <Text style={styles.subHeadingSport}>{this.props.results[0].sport}</Text>
+        <Text style={styles.subHeadingDate}>{dateString}</Text>
+        <View style={styles.scoring}>
+          <Image source={require("../assets/uflogo.png")} style={styles.teamLogo} />
+          <Text style={styles.teamName}>UF</Text>
+          <View style={styles.scoreBox}>
+          <Text style={this.props.darkModeIsEnabled ? styles.scoreValuesDark : styles.scoreValues}>{this.props.results[0].team_score} - {this.props.results[0].opponent_score}</Text>
+          </View>
+          <Text style={styles.teamName}>{this.props.results[0].opponent_short_name}</Text>
+          <Image source={{uri: this.props.results[0].opponent_image}} style={styles.teamLogo} />
+        </View>
+      </View>
     )
   }
 }
@@ -86,19 +54,14 @@ const styles = StyleSheet.create({
     textShadowRadius: 0.25,
     textShadowColor: "#0021A5"
   },
-  live: {
-    alignSelf: "center",
-    paddingLeft: 5,
-    color: "#ff1a1a"
-  },
-  subHeading: {
+  subHeadingSport: {
     textAlign: "center",
     fontSize: 10 * scale,
     color: "#FA4616",
     textShadowRadius: 0.25,
     textShadowColor: "#0021A5"
   },
-  subHeadingTime: {
+  subHeadingDate: {
     textAlign: "center",
     fontSize: 8 * scale,
     color: "#FA4616",
@@ -151,4 +114,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default LiveScores;
+function mapStateToProps(state) {
+  return {
+    results: state.results
+  }
+}
+
+export default connect(mapStateToProps)(RecentResults);

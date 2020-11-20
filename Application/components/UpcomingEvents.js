@@ -16,13 +16,24 @@ class UpcomingEvents extends React.Component {
     }
   }
 
+  configureText = (input) => {
+    let maxLimit = 25
+    if(input.length > maxLimit){
+      return (input.substring(0, maxLimit-3) + "...")
+    }
+    else{
+      return input
+    }
+
+  }
+
   renderItem = ({ item, index }) => {
     var date = new Date(item.date)
     var dateString = monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " "
     return (
       <View key={index}>
         <Text style={styles.eventText}>{item.sport}</Text>
-        <Text style={styles.eventSubText1}>UF{item.location == "H" ? " vs " : " at "}{item.opponent}</Text>
+        <Text style={styles.eventSubText1}>UF{item.location == "H" ? " vs " : " at "}{this.configureText(item.opponent)}</Text>
         <Text style={styles.eventSubText2}>{dateString}{item.time}</Text>
       </View>
     )

@@ -9,21 +9,20 @@ url = "https://floridagators.com"
 r = requests.get(url, timeout=5, headers=HEADERS)
 soup = bs(r.content, features="html.parser")
 
-events_script = soup.find(id="events").find("script").string
-events_string = re.findall("var obj = (.*?);", events_script)[0]
-events_data = json.loads(events_string)["data"]
+news_script = soup.find(id="stories").find("script").string
+news_string = re.findall("var obj = (.*?);", news_script)[0]
+news_data = json.loads(news_string)["data"]
 
-data= []
+data = []
 
-for event in events_data:
-  event_data_reduced = json.dumps({
-    "date" : event["date"][0:10],
-    "time" : event["time"],
-    "location" : event["location_indicator"],
-    "sport" : event["sport"]["title"],
-    "opponent" : event["opponent"]["title"]
+for story in news_data:
+  news_data_reduced = json.dumps({
+    "title" : story["content_title"],
+    "image" : story["content_image_url"],
+    "url" : story["content_url"],
+    "date" : story["content_date"][0:10]
   })
-  data.append(json.loads(event_data_reduced))
+  data.append(json.loads(news_data_reduced))
 
 firebaseConfig = {
   "apiKey": "AIzaSyCwORSWUNWpBSwA3cSVXnngqDNSAFuromM",
@@ -34,4 +33,4 @@ firebaseConfig = {
 
 firebase = pyrebase.initialize_app(firebaseConfig)
 db = firebase.database()
-db.child("events").set(data)
+db.child("news").set(data)

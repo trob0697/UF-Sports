@@ -1,7 +1,8 @@
 const initialState = {
   darkModeIsEnabled: false,
+  results: [],
   events: [],
-  stories: []
+  news: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,15 +12,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         darkModeIsEnabled: !state.darkModeIsEnabled
       }
+    case "FETCH_RESULTS":
+      return {
+        ...state,
+        results: action.payload
+      }
     case "FETCH_EVENTS":
       return {
         ...state,
         events: action.payload
       }
-    case "FETCH_STORIES":
+    case "FETCH_NEWS":
       return {
         ...state,
-        stories: action.payload
+        news: action.payload
       }
     default:
       return state

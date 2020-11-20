@@ -9,7 +9,7 @@ const scale = SCREEN_WIDTH / 320;
 
 var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-class RecentNews extends React.Component {
+class BreakingNews extends React.Component {
   constructor(props) {
     super(props)
     this.state = { }
@@ -36,9 +36,9 @@ class RecentNews extends React.Component {
   render() {
     return (
       <View style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
-        <Text style={styles.title}>Recent News</Text>
+        <Text style={styles.title}>Breaking News</Text>
         <Carousel
-          data={this.props.stories}
+          data={this.props.news}
           extraData={Math.random()}
           renderItem={this.renderItem}
           sliderWidth={SCREEN_WIDTH}
@@ -117,8 +117,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    stories: state.stories
+    news: state.news
   }
 }
 
-export default connect(mapStateToProps)(RecentNews);
+export default connect(mapStateToProps)(BreakingNews);
