@@ -13,16 +13,6 @@ events_script = soup.find(id="events").find("script").string
 events_string = re.findall("var obj = (.*?);", events_script)[0]
 events_data = json.loads(events_string)["data"]
 
-def getGender(input):
-  sex = ""
-  
-  if input == "m":
-    sex = "Mens"
-  else:
-    sex = "Womens"
-
-  return sex
-
 data= []
 
 for event in events_data:
@@ -30,7 +20,7 @@ for event in events_data:
     "date" : event["date"][0:10],
     "time" : event["time"],
     "location" : event["location_indicator"],
-    "sport" : getGender(event["sport"]["gender"]) + " " + event["sport"]["title"],
+    "sport" : event["sport"]["title"],
     "opponent" : event["opponent"]["title"]
   })
   data.append(json.loads(event_data_reduced))

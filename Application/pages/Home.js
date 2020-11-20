@@ -1,5 +1,6 @@
 import React from "react";
 import { Dimensions, StyleSheet, View, Image } from "react-native";
+import { connect } from "react-redux";
 
 import WebViewer from "../components/WebViewer.js";
 import LiveScores from "../components/LiveScores.js";
@@ -34,17 +35,17 @@ class Home extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
       {this.state.webViewerVisible ?
         <WebViewer url={this.state.url} closeWebViewer={this.closeWebViewer}/>
-        :
+      :
         <>
           <View style={styles.subHeader}>
             <Image source={require("../assets/gatorlogo.jpg")} style={styles.gatorLogo} />
           </View>
-          <LiveScores/>
-          <UpcomingEvents/>
-          <RecentNews openWebViewer={this.openWebViewer}/>
+          <LiveScores darkModeIsEnabled={this.props.darkModeIsEnabled}/>
+          <UpcomingEvents darkModeIsEnabled={this.props.darkModeIsEnabled}/>
+          <RecentNews darkModeIsEnabled={this.props.darkModeIsEnabled} openWebViewer={this.openWebViewer}/>
         </>
       }
       </View>
@@ -55,6 +56,10 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerDark: {
+    flex: 1,
+    backgroundColor: "#444444"
   },
   subHeader: {
     flex: 2,
@@ -69,4 +74,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Home;
+function mapStateToProps(state) {
+  return {
+    darkModeIsEnabled: state.darkModeIsEnabled
+  }
+}
+
+export default connect(mapStateToProps)(Home);

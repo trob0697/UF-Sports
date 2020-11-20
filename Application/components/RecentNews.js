@@ -12,16 +12,16 @@ var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep",
 class RecentNews extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = { }
   }
 
   renderItem = ({ item, index }) => {
     var date = new Date(item.date)
-    var dateString = monthNames[date.getMonth()] + " " + date.getDay() + ", " + date.getFullYear()
+    var dateString = monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear()
     return (
       <ImageBackground key={index} source={{ uri: item.image }} style={styles.image} imageStyle={{ borderRadius: 25 }}>
         <View style={styles.imageContainer}>
-          <View style={styles.textContainer}>
+          <View style={this.props.darkModeIsEnabled ? styles.textContainerDark : styles.textContainer}>
             <View style={{ flexDirection: "column" }}>
               <Text style={styles.contentTitle}>{item.title}</Text>
               <Text style={styles.contentDate}>{dateString}</Text>
@@ -35,10 +35,11 @@ class RecentNews extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
         <Text style={styles.title}>Recent News</Text>
         <Carousel
           data={this.props.stories}
+          extraData={Math.random()}
           renderItem={this.renderItem}
           sliderWidth={SCREEN_WIDTH}
           itemWidth={SCREEN_WIDTH * 0.8}
@@ -51,13 +52,20 @@ class RecentNews extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 4,
+    paddingTop: 7.5,
     backgroundColor: "#F5F5F5",
-    paddingTop: 7.5
+  },
+  containerDark: {
+    flex: 4,
+    paddingTop: 7.5,
+    backgroundColor: "#444444",
   },
   title: {
     paddingHorizontal: 15,
     fontSize: 14 * scale,
-    color: "#0021A5"
+    color: "#FA4616",
+    textShadowRadius: 0.25,
+    textShadowColor: "#0021A5",
   },
   image: {
     resizeMode: "contain",
@@ -77,6 +85,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     backgroundColor: "#F5F5F5"
+  },
+  textContainerDark: {
+    flexDirection: "row",
+    padding: 5,
+    width: SCREEN_WIDTH * 0.7,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    backgroundColor: "#444444"
   },
   contentTitle: {
     maxWidth: SCREEN_WIDTH * 0.6,
