@@ -12,6 +12,7 @@ class Loading extends React.Component {
   async componentDidMount() {
     this.props.fetchEvents(await this.fetchData("events"))
     this.props.fetchStories(await this.fetchData("stories"))
+    this.props.fetchRosters(await this.fetchData('rosters'))
     setTimeout(() => this.props.toggleLoading(), 4000)
     //console.log(this.props.redux)
   }
@@ -61,7 +62,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchEvents: (input) => dispatch({ type: "FETCH_EVENTS", payload: input }),
-    fetchStories: (input) => dispatch({ type: "FETCH_STORIES", payload: input })
+    fetchStories: (input) => dispatch({ type: "FETCH_STORIES", payload: input }),
+    fetchRosters: (input) => dispatch({ type: "FETCH_ROSTERS", payload: input })
   }
 }
 

@@ -3,31 +3,14 @@ import { StyleSheet, View, Text, FlatList, Image, SafeAreaView } from "react-nat
 import firebase from "../firebase"
 import RNPickerSelect from 'react-native-picker-select'
 import { Ionicons } from '@expo/vector-icons'
+import { connect } from "react-redux";
 
 class Rosters extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      rosterList: [],
       selectedRoster: null
     }
-  }
-
-  async componentDidMount(){
-
-    await firebase
-    .database()
-    .ref('rosters')
-    .once("value")
-    .then((snapshot) => {
-      var snapshotArr = []
-      snapshot.forEach(function (childSnapshot) {
-        var item = childSnapshot.val()
-        snapshotArr.push(item)
-      })
-    this.setState({ rosterList: snapshotArr})
-    })
-
   }
 
   FlatListItemSeparator = () => {
@@ -99,7 +82,7 @@ class Rosters extends React.Component {
         </View>
 
         <FlatList
-        data={this.state.rosterList[this.state.selectedRoster]}
+        data={this.props.rosters[this.state.selectedRoster]}
         renderItem={renderItem}
         ItemSeparatorComponent = {this.FlatListItemSeparator}
         keyExtractor={item => item.name}
@@ -108,7 +91,11 @@ class Rosters extends React.Component {
     )
   }
 }
-
+function mapStateToProps(state) {
+  return {
+    rosters: state.rosters
+  }
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -123,4 +110,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Rosters;
+export default connect(mapStateToProps)(Rosters);

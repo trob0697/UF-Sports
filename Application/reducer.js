@@ -1,6 +1,7 @@
 const initialState = {
   events: [],
-  stories: []
+  stories: [],
+  rosters: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         stories: action.payload
+      }
+    case "FETCH_ROSTERS":
+      return {
+        ...state,
+        rosters: action.payload
       }
     default:
       return state
