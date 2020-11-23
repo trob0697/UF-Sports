@@ -16,13 +16,24 @@ class UpcomingEvents extends React.Component {
     }
   }
 
+  configureText = (input) => {
+    let maxLimit = 25
+    if(input.length > maxLimit){
+      return (input.substring(0, maxLimit-3) + "...")
+    }
+    else{
+      return input
+    }
+
+  }
+
   renderItem = ({ item, index }) => {
     var date = new Date(item.date)
-    var dateString = monthNames[date.getMonth()] + " " + date.getDay() + ", " + date.getFullYear() + " "
+    var dateString = monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " "
     return (
       <View key={index}>
         <Text style={styles.eventText}>{item.sport}</Text>
-        <Text style={styles.eventSubText1}>UF{item.location == "H" ? " vs " : " at "}{item.opponent}</Text>
+        <Text style={styles.eventSubText1}>UF{item.location == "H" ? " vs " : " at "}{this.configureText(item.opponent)}</Text>
         <Text style={styles.eventSubText2}>{dateString}{item.time}</Text>
       </View>
     )
@@ -30,7 +41,7 @@ class UpcomingEvents extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
         <Text style={styles.title}>Upcoming Events</Text>
         <Carousel
           data={this.props.events}
@@ -53,35 +64,43 @@ class UpcomingEvents extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
     paddingTop: 15,
-    paddingBottom: 0
+    paddingBottom: 0,
+    backgroundColor: "#F5F5F5"
+  },
+  containerDark: {
+    flex: 1,
+    paddingTop: 15,
+    paddingBottom: 0,
+    backgroundColor: "#444444"
   },
   title: {
     paddingLeft: 15,
     fontSize: 14 * scale,
-    color: "#0021A5"
+    color: "#FA4616",
+    textShadowRadius: 0.25,
+    textShadowColor: "#0021A5"
   },
   eventText: {
     paddingTop: 5,
     textAlign: "center",
     fontSize: 12 * scale,
     color: "#FA4616",
-    textShadowRadius: 0.5,
+    textShadowRadius: 0.25,
     textShadowColor: "#0021A5"
   },
   eventSubText1: {
     textAlign: "center",
     fontSize: 14 * scale,
     color: "#FA4616",
-    textShadowRadius: 0.5,
+    textShadowRadius: 0.25,
     textShadowColor: "#0021A5"
   },
   eventSubText2: {
     textAlign: "center",
     fontSize: 8 * scale,
     color: "#FA4616",
-    textShadowRadius: 0.5,
+    textShadowRadius: 0.25,
     textShadowColor: "#0021A5"
   },
   pagination: {

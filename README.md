@@ -2,7 +2,11 @@
 
 Summary of Application Here
 
+[GANTT Chart](https://imgur.com/a/LfFAYWd)
+
 [Wireframes](https://www.figma.com/file/wMaIYHPwVrpYJMHmyRnN35/UF-Sports)
+
+Email: trtnufsports@gmail.com:gogators!
 
 # Scripts
 - npm install (Must be done first: Install all dependences and packages)
