@@ -60,7 +60,7 @@ class CalendarPage extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={this.props.darkModeIsEnabled ? styles.darkContainer : styles.container}>
         <View style={styles.subHeader}>
           <Image
             source={require("../assets/gatorlogo.jpg")}
@@ -69,6 +69,7 @@ class CalendarPage extends React.Component {
         </View>
         <View>
           <Calendar
+
             onDayPress={(day) => {
               if(this.props.calendar.some((event) => event.date === day.dateString))
                 this.setState({
@@ -87,7 +88,7 @@ class CalendarPage extends React.Component {
             close={() => this.setState({ modalVisible: false })}
           />
         </View>
-        <View>
+        <View style = {{paddingTop: 10}}>
           <Text style={{textAlign: 'center', fontSize: 15, textDecorationLine: 'underline'}}>{this.state.showEvents ? moment(this.state.selectedDate).format("MMMM Do[,] YYYY") : ""}</Text>
         </View>
         {this.state.showEvents && this.displayEvents()}
@@ -99,6 +100,11 @@ class CalendarPage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white'
+  },
+  darkContainer: {
+    flex: 1,
+    backgroundColor: '#E0E0E0'
   },
   subHeader: {
     flex: 2,
@@ -115,7 +121,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    calendar: state.calendar
+    calendar: state.calendar,
+    darkModeIsEnabled: state.darkModeIsEnabled
   }
 }
 
