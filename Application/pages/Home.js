@@ -41,7 +41,7 @@ class Home extends React.Component {
       :
         <>
           <View style={styles.subHeader}>
-            <Image source={require("../assets/gatorlogo.jpg")} style={styles.gatorLogo} />
+            <Image source={require("../assets/gatorlogo1.jpg")} style={styles.gatorLogo} />
           </View>
           <RecentResults darkModeIsEnabled={this.props.darkModeIsEnabled}/>
           <UpcomingEvents darkModeIsEnabled={this.props.darkModeIsEnabled}/>

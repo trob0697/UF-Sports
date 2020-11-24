@@ -30,6 +30,7 @@ for event in allEvents:
             'date': dateFormatter(eventJSON['title']),
             'time': eventJSON['event']['date_time'].replace('<span class="lw_date_separator">-</span>', '-'),
             'location': eventJSON['event']['location'],
+            'marked': True
         }
         eventList.append(eventInfo)
 
@@ -43,4 +44,4 @@ firebaseConfig = {
 }
 firebase = pyrebase.initialize_app(firebaseConfig)
 db = firebase.database()
-db.child("calendarEvents").set(eventList)
+db.child("calendar").set(eventList)

@@ -13,7 +13,7 @@ class Loading extends React.Component {
     this.props.fetchResults(await this.fetchData("results"))
     this.props.fetchEvents(await this.fetchData("events"))
     this.props.fetchStories(await this.fetchData("stories"))
-    this.props.fetchCalendar(await this.fetchDataTemp("calendarEvents"))
+    this.props.fetchCalendar(await this.fetchData("calendar"))
     this.props.fetchNews(await this.fetchData("news"))
     setTimeout(() => this.props.toggleLoading(), 4000)
     //console.log(this.props.redux)
@@ -24,18 +24,6 @@ class Loading extends React.Component {
     await firebase.database().ref(val).once("value").then(snapshot => {
       snapshot.forEach((childSnapshot) => {
         var item = childSnapshot.val()
-        snapshotArr.push(item)
-      })
-    })
-    return snapshotArr
-  }
-
-  fetchDataTemp = async (val) => {
-    var snapshotArr = []
-    await firebase.database().ref("calendarEvents").once("value").then((snapshot) => {
-      snapshot.forEach(function (childSnapshot) {
-        var item = childSnapshot.val()
-        item.marked = true
         snapshotArr.push(item)
       })
     })

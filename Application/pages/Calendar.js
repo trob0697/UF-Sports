@@ -63,7 +63,7 @@ class CalendarPage extends React.Component {
       <ScrollView style={this.props.darkModeIsEnabled ? styles.darkContainer : styles.container}>
         <View style={styles.subHeader}>
           <Image
-            source={require("../assets/gatorlogo.jpg")}
+            source={require("../assets/gatorlogo2.jpeg")}
             style={styles.gatorLogo}
           />
         </View>
@@ -89,7 +89,7 @@ class CalendarPage extends React.Component {
           />
         </View>
         <View style = {{paddingTop: 10}}>
-          <Text style={{textAlign: 'center', fontSize: 15, textDecorationLine: 'underline'}}>{this.state.showEvents ? moment(this.state.selectedDate).format("MMMM Do[,] YYYY") : ""}</Text>
+          <Text style={styles.dateText}>{this.state.showEvents ? moment(this.state.selectedDate).format("MMMM Do[,] YYYY") : ""}</Text>
         </View>
         {this.state.showEvents && this.displayEvents()}
       </ScrollView>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   darkContainer: {
     flex: 1,
-    backgroundColor: '#E0E0E0'
+    backgroundColor: '#444444'
   },
   subHeader: {
     flex: 2,
@@ -115,7 +115,16 @@ const styles = StyleSheet.create({
   gatorLogo: {
     resizeMode: "contain",
     width: "100%",
-    height: 150 * scale - 10
+    height: 186 * scale - 10
+  },
+  dateText: {
+    textAlign: 'center',
+    fontSize: 15,
+    color: "#FA4616",
+    textShadowRadius: 0.25,
+    textShadowColor: "#0021A5",
+    textDecorationLine: 'underline',
+    textDecorationColor: "#FA4616"
   }
 })
 
