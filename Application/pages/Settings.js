@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, StyleSheet, View, Text, Switch, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { Dimensions, StyleSheet, View, Text, Switch, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Linking } from "react-native";
 import { connect } from "react-redux";
 
 import Feedback from "../components/Feedback.js";
@@ -56,7 +56,10 @@ class Settings extends React.Component {
             <View>
               <Text style={styles.headerText}>About</Text>
               <View style={{height: SCREEN_HEIGHT*0.25}}>
-                <Text style={styles.about}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+                <Text style={styles.about}>
+                  This mobile application was created by Tahreak Robinson and Timothy Nguyen during the Fall semester of 2020 at the University of Florida. It was developed for the class CIS4914 under the professor Dr. Mark S. Schmalz and project advisor Dr. Byron Williams. The app was created using the JavaScript library React Native. The source code for this application can be found 
+                  <Text style={{color: 'blue'}} onPress={() => Linking.openURL("https://github.com/trob0697/UF-Sports")}> here</Text>.
+                </Text>
               </View>
             </View>
 
