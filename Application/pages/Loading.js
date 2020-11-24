@@ -12,19 +12,19 @@ class Loading extends React.Component {
   async componentDidMount() {
     this.props.fetchResults(await this.fetchData("results"))
     this.props.fetchEvents(await this.fetchData("events"))
-    this.props.fetchStories(await this.fetchData("stories"))
-    this.props.fetchRosters(await this.fetchData('rosters'))
     this.props.fetchNews(await this.fetchData("news"))
+    this.props.fetchCalendar(await this.fetchData("calendar"))
+    this.props.fetchRosters(await this.fetchData('rosters'))
     setTimeout(() => this.props.toggleLoading(), 4000)
     //console.log(this.props.redux)
   }
 
   fetchData = async (val) => {
-    var snapshotArr = [];
+    var snapshotArr = []
     await firebase.database().ref(val).once("value").then(snapshot => {
       snapshot.forEach((childSnapshot) => {
-        var item = childSnapshot.val();
-        snapshotArr.push(item);
+        var item = childSnapshot.val()
+        snapshotArr.push(item)
       })
     })
     return snapshotArr
@@ -65,9 +65,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchResults: (input) => dispatch({ type: "FETCH_RESULTS", payload: input }),
     fetchEvents: (input) => dispatch({ type: "FETCH_EVENTS", payload: input }),
-    fetchStories: (input) => dispatch({ type: "FETCH_STORIES", payload: input }),
-    fetchRosters: (input) => dispatch({ type: "FETCH_ROSTERS", payload: input }),
-    fetchNews: (input) => dispatch({ type: "FETCH_NEWS", payload: input })
+    fetchNews: (input) => dispatch({ type: "FETCH_NEWS", payload: input }),
+    fetchCalendar: (input) => dispatch({ type: "FETCH_CALENDAR", payload: input }),
+    fetchRosters: (input) => dispatch({ type: "FETCH_ROSTERS", payload: input })
   }
 }
 

@@ -2,9 +2,9 @@ const initialState = {
   darkModeIsEnabled: false,
   results: [],
   events: [],
-  stories: [],
-  rosters: [],
-  news: []
+  news: [],
+  calendar: [],
+  rosters: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +28,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         news: action.payload
+      }
+    case "FETCH_CALENDAR":
+      return {
+        ...state,
+        calendar: action.payload
       }
     case "FETCH_ROSTERS":
       return {
