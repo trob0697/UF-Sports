@@ -29,14 +29,14 @@ class Rosters extends React.Component {
     
     const renderItem = ({ item }) => (
         
-        <View style = {{flex: 1, flexDirection: 'row', alignContent: 'center', padding: 5}}>
+        <View style = {{flex: 1, flexDirection: 'row', alignContent: 'center', padding: 5, backgroundColor: this.props.darkModeIsEnabled ? '#444444' : 'white'}}>
           <View style = {{marginRight: 5}}>
             <Image source={{uri: item.image}} style = {{width: 75, height: 100, resizeMode: 'contain'}}></Image>
           </View>
 
           <View style = {{flex: 1, flexDirection: 'column', alignContent: 'center'}}>
-            <Text>{item.number}, {item.name}, {item.position}</Text>
-            <Text>{item.hometown}, {item.year}</Text>
+            <Text style = {{color: this.props.darkModeIsEnabled ? 'white' : 'black'}}>{item.number}, {item.name}, {item.position}</Text>
+            <Text style = {{color: this.props.darkModeIsEnabled ? 'white' : 'black'}}>{item.hometown}, {item.year}</Text>
           </View>
         </View>
 
@@ -44,7 +44,8 @@ class Rosters extends React.Component {
     );
   
     return (
-      <SafeAreaView style={styles.container}>
+      
+      <SafeAreaView style={this.props.darkModeIsEnabled ? styles.containerDark : styles.container}>
         <View style = {{alignContent: 'center', justifyContent: 'center'}}>
           <RNPickerSelect
                 onValueChange={(value) => this.setState({selectedRoster: value})}
@@ -59,16 +60,17 @@ class Rosters extends React.Component {
                     { label: 'Women\'s Lacrosse', value: '3'},
                     { label: 'Women\'s Soccer', value: '4'}
                 ]}
-                style = {{inputIOS: {
-                  fontSize: 16,
-                  paddingVertical: 12,
-                  paddingHorizontal: 10,
-                  borderWidth: 1,
-                  borderColor: 'gray',
-                  borderLeftColor: 'transparent',
-                  borderRightColor: 'transparent',
-                  color: 'black',
-                  paddingRight: 30,
+                style = {{
+                  inputIOS: {
+                    fontSize: 16,
+                    paddingVertical: 12,
+                    paddingHorizontal: 10,
+                    borderWidth: 1,
+                    borderColor: 'black',
+                    borderLeftColor: 'transparent',
+                    borderRightColor: 'transparent',
+                    color: this.props.darkModeIsEnabled ? 'white' : 'black',
+                    paddingRight: 30,
                 },
                 iconContainer: {
                   top: 10,
@@ -93,13 +95,18 @@ class Rosters extends React.Component {
 }
 function mapStateToProps(state) {
   return {
-    rosters: state.rosters
+    rosters: state.rosters,
+    darkModeIsEnabled: state.darkModeIsEnabled
   }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center"
+    
+  },
+  containerDark: {
+    flex: 1,
+    backgroundColor: "#444444"
   },
   item: {
     padding: 10,
